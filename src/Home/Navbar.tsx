@@ -26,7 +26,7 @@ function Navbar() {
       </div>
 
       <div className="nav-custom-2 hidden sm:block">
-        <Link className="login" to='#login'>Login</Link>
+        <Link className="login" to='/login'>Login</Link>
         <Link className="register" to='/register'>Get started</Link>
       </div>
     </div>

@@ -17,7 +17,7 @@ function SmallDeviceNav({callback, isOpen} : {callback : () => void, isOpen : bo
             <NavLink to='/'>Home</NavLink>
             <NavLink to='/about'>About</NavLink>
             <NavLink to='/how-it-works'>How it works</NavLink>
-            <Link className="login" to='#login'>Login</Link>
+            <Link className="login" to='/login'>Login</Link>
             <Link className="register" to='/register'>Get started</Link>
           </div>
         )}

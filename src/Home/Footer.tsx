@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { GeneralContext } from "../GeneralContext";
+import { useContext } from "react";
 
 function Footer() {
+    const context = useContext(GeneralContext);
+    if (!context) throw new Error("Footer must be used within a ContextProvider");
+
+    const {isReady} = context;
+
     return(
+        isReady &&
         <div className="bg-decent-black bottom-0 pb-4 mt-14">
         <div className="grid grid-cols-2 gap-3 mx-4 text-white sm:grid-cols-3">
             <div className="flex flex-col mt-4">

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import HomeMainDiv from "./HomeMainDiv";
+import { GeneralContext } from "../GeneralContext";
 
 interface HomeData {
     header : {head : string, 'first-sub-head' : string, 'second-sub-head' : string};
@@ -8,6 +9,11 @@ interface HomeData {
 
 function Home() {
     const [data, setData] = useState<HomeData | null>(null);
+    
+    const context = useContext(GeneralContext);
+    if (!context) throw new Error("Footer must be used within a ContextProvider");
+
+    const {setIsReady} = context;
 
     useEffect(() => {
         document.title = 'Gibby - Save to achieve goals';
@@ -26,6 +32,7 @@ function Home() {
     
             const jsonData = await response.json();
             setData(jsonData);
+            setIsReady(true);
         } catch (error : any) {
             console.log(error);
         }
@@ -36,7 +43,6 @@ function Home() {
         };
     
         fetchData();
-  
     }, []);
     return (
         <div className="font-sans text-xl custom-home mt-16 max-w-screen-2xl">
