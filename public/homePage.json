@@ -1,0 +1,22 @@
+{
+    "header" : {
+        "head" : "Gibby savings app",
+        "first-sub-head" : "Get paid for saving your money.",
+        "second-sub-head" : "Invest with Gibby, begin a new savings Journey or continue growing a previous Goal."
+    },
+    "second-div" : {
+        "head" : "Getting started",
+        "sub-body-1" : {
+            "head" : "Save for a purpose",
+            "body" : "Specify a purpose for saving and monitor the progress"
+        },
+        "sub-body-2" : {
+            "head" : "Flexible saving options",
+            "body" : "Save with ease, from the comfort of your home with full money safety assurance"
+        },
+        "sub-body-3" : {
+            "head" : "Fixed Deposit",
+            "body" : "Specify a duration for how long you want to save the money and gibby locks it away from your access"
+        }
+    }
+}

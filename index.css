@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-home > div {
+  @apply ml-3 mr-3 lg:mt-10 sm:ml-9 sm:mr-9;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; 
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
+}
+
+.scrollbar-hide > div {
+  @apply mr-4 flex-none
+}
+
+.second-div-custom > div {
+  @apply shadow-xl pb-16 rounded-4xl mb-4;
+}
+.active {
+  @apply text-blue-600 font-bold;
+}
+.small-nav-custom > a {
+  @apply px-6 py-2 font-semibold w-full text-center;
+}
+.small-nav-custom > .login {
+  @apply border-2 border-blue-600 text-blue-600;
+}
+.small-nav-custom > .register {
+  @apply bg-blue-600 text-white;
+}
+
+.nav-custom-1 > a {
+  @apply sm:mr-3 font-semibold md:mr-4 lg:mr-6;
+}
+
+.nav-custom-2 > a {
+  @apply sm:mr-3 font-semibold sm:px-2 sm:py-2 md:px-3 md:py-3 md:mr-4 lg:px-4 lg:mr-5;
+}
+
+.nav-custom-2 > .login {
+  @apply border-2 border-blue-600 text-blue-600 rounded-md;
+}
+
+.nav-custom-2 > .register {
+  @apply bg-blue-600 text-white rounded-md;
+}
