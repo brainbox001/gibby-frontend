@@ -124,7 +124,7 @@ function VerifyEmail({email, forPasswordChange, processes, setProcesses} :{email
 
     return (
         <>
-
+        <div>{JSON.stringify(status)}</div>
         <div ref={errorDivRef} className={`${status.state === 'error' ? 'block' : 'hidden'} grid grid-cols-1 place-items-center text-white text-rose-600 z-10 `}>
             <div className="bg-rose-500 px-3 sm:px-4 sm:py-3 md:px-9 py-2 rounded-xl text-sm sm:text-lg">
                 <span>An error occured while connecting...</span>
