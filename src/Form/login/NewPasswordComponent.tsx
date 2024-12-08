@@ -15,20 +15,12 @@ function NewPasswordComponent({processes, setProcesses} : {processes : any, setP
 
   function handlePasswordValidate() {
     const password = passwordRef.current.value;
-    let containsSymbol = false;
+    let containsSymbol = true;
     let containsNumber = false;
     let containsLetter = false;
     let noExcluded = true;
     for (const char of password) {
-      if (
-        (char.charCodeAt(0) === 63 ||
-          char.charCodeAt(0) === 64 ||
-          (char.charCodeAt(0) > 32 && char.charCodeAt(0) < 48)) &&
-        char.charCodeAt(0) !== 34 &&
-        char.charCodeAt(0) !== 39 &&
-        char.charCodeAt(0) !== 47
-      )
-        containsSymbol = true;
+      if (char.charCodeAt(0) < 32 || char.charCodeAt(0) === 34 || char.charCodeAt(0) === 39 || char.charCodeAt(0) === 47) containsSymbol = false
       else if (char.charCodeAt(0) > 47 && char.charCodeAt(0) < 58)
         containsNumber = true;
       else if (
