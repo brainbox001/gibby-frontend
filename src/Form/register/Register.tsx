@@ -62,17 +62,15 @@ function Register() {
         let containsSymbol = true;
         let containsNumber = false;
         let containsLetter = false;
-        let noExcluded = true;
         let passwordStr : string = passwordRef.current.value;
         for (const char of passwordStr) {
             if (char.charCodeAt(0) < 32 || char.charCodeAt(0) === 34 || char.charCodeAt(0) === 39 || char.charCodeAt(0) === 47) containsSymbol = false;
 
             else if(char.charCodeAt(0) > 47 && char.charCodeAt(0) < 58) containsNumber = true;
 
-            else if((char.charCodeAt(0) > 65 && char.charCodeAt(0) < 90) || (char.charCodeAt(0) > 97 && char.charCodeAt(0) < 122)) containsLetter = true;
-            else noExcluded = false;
+            else if((char.charCodeAt(0) > 65 && char.charCodeAt(0) < 91) || (char.charCodeAt(0) > 97 && char.charCodeAt(0) < 122)) containsLetter = true;
         }
-        let validPassword = containsLetter && containsNumber && containsSymbol && passwordStr.length > 7 && noExcluded;
+        let validPassword = containsLetter && containsNumber && containsSymbol && passwordStr.length > 7;
         setForm({
             ...form,
             validPassword
