@@ -18,24 +18,22 @@ function NewPasswordComponent({processes, setProcesses} : {processes : any, setP
     let containsSymbol = true;
     let containsNumber = false;
     let containsLetter = false;
-    let noExcluded = true;
+    
     for (const char of password) {
       if (char.charCodeAt(0) < 32 || char.charCodeAt(0) === 34 || char.charCodeAt(0) === 39 || char.charCodeAt(0) === 47) containsSymbol = false
       else if (char.charCodeAt(0) > 47 && char.charCodeAt(0) < 58)
         containsNumber = true;
       else if (
-        (char.charCodeAt(0) > 65 && char.charCodeAt(0) < 90) ||
+        (char.charCodeAt(0) > 65 && char.charCodeAt(0) < 91) ||
         (char.charCodeAt(0) > 97 && char.charCodeAt(0) < 122)
       )
         containsLetter = true;
-      else noExcluded = false;
     }
     let validPassword =
       containsLetter &&
       containsNumber &&
       containsSymbol &&
-      password.length > 7 &&
-      noExcluded;
+      password.length > 7;
     validPassword
       ? setPasswords({
           ...passwords,
