@@ -160,7 +160,6 @@ function Dashboard({
               >
                 {data.message.length > 0 ? (
                   data.message.map((item: any) => {
-                    console.log((item.duration).getTime());
                     const progress = Math.floor(
                       (item.startAmount / item.target) * 100
                     );
