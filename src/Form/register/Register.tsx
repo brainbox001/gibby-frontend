@@ -148,7 +148,7 @@ function Register() {
                     body: JSON.stringify(body),
                   });
                   const data = await response.json();
-
+                    console.log(data)
                   if (response.status === 201) setStatus({state : 'not loading', status: 201, data: data.email});
                   else setStatus({state : 'error', status:response.status, data: data.error});
 
