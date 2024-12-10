@@ -217,66 +217,65 @@
 //   );
 // }
 
-// export function calculateTimeLeft(date: number) {
-//   const currentDate = Date.now();
+export function calculateTimeLeft(date: number) {
+  const currentDate = Date.now();
 
-//   let yearsLeft = Math.floor(
-//     (date - currentDate) / (1000 * 60 * 60 * 24 * 360)
-//   );
-//   let monthsLeft = Math.floor(
-//     (date - currentDate) / (1000 * 60 * 60 * 24 * 30)
-//   );
-//   let daysLeft = Math.floor((date - currentDate) / (1000 * 60 * 60 * 24));
-//   let hoursLeft = Math.floor((date - currentDate) / (1000 * 60 * 60));
-//   let minutesLeft = Math.floor((date - currentDate) / (1000 * 60));
+  let yearsLeft = Math.floor(
+    (date - currentDate) / (1000 * 60 * 60 * 24 * 360)
+  );
+  let monthsLeft = Math.floor(
+    (date - currentDate) / (1000 * 60 * 60 * 24 * 30)
+  );
+  let daysLeft = Math.floor((date - currentDate) / (1000 * 60 * 60 * 24));
+  let hoursLeft = Math.floor((date - currentDate) / (1000 * 60 * 60));
+  let minutesLeft = Math.floor((date - currentDate) / (1000 * 60));
 
-//   if (yearsLeft > 0) {
-//     return yearsLeft === 1 ? "A Year left" : `${yearsLeft} Years left`;
-//   }
-//   if (monthsLeft > 0) {
-//     return yearsLeft === 1 ? "A Month left" : `${monthsLeft} Months left`;
-//   }
-//   if (daysLeft > 0) {
-//     return daysLeft === 1 ? "A Day left" : `${daysLeft} Days left`;
-//   }
-//   if (hoursLeft > 0) {
-//     return hoursLeft === 1 ? "An Hour left" : `${hoursLeft} Hours left`;
-//   }
+  if (yearsLeft > 0) {
+    return yearsLeft === 1 ? "A Year left" : `${yearsLeft} Years left`;
+  }
+  if (monthsLeft > 0) {
+    return yearsLeft === 1 ? "A Month left" : `${monthsLeft} Months left`;
+  }
+  if (daysLeft > 0) {
+    return daysLeft === 1 ? "A Day left" : `${daysLeft} Days left`;
+  }
+  if (hoursLeft > 0) {
+    return hoursLeft === 1 ? "An Hour left" : `${hoursLeft} Hours left`;
+  }
 
-//   if (minutesLeft > 0) {
-//     return minutesLeft === 1 ? "A Minute left" : `${minutesLeft} Minutes left`;
-//   }
+  if (minutesLeft > 0) {
+    return minutesLeft === 1 ? "A Minute left" : `${minutesLeft} Minutes left`;
+  }
 
-//   return "Duration elapsed";
-// }
+  return "Duration elapsed";
+}
 
-// export function colorChange(progress: number) {
-//   if (progress >= 95) return "bg-green-700";
-//   if (progress >= 50 && progress < 95) return "bg-blue-600";
-//   return "bg-rose-600";
-// }
+export function colorChange(progress: number) {
+  if (progress >= 95) return "bg-green-700";
+  if (progress >= 50 && progress < 95) return "bg-blue-600";
+  return "bg-rose-600";
+}
 
-// export function parseBalance(balance: number) {
-//   let parsed = "";
-//   let mod = 0;
-//   let count = 0;
-//   if (balance === 0) parsed = "0.00";
-//   while (balance > 0) {
-//     if (count === 3) {
-//       parsed = "," + parsed;
-//       count = 0;
-//     }
-//     mod = balance % 10;
-//     parsed = mod + parsed;
-//     balance = Math.floor(balance / 10);
-//     count++;
-//   }
-//   return parsed;
-// }
+export function parseBalance(balance: number) {
+  let parsed = "";
+  let mod = 0;
+  let count = 0;
+  if (balance === 0) parsed = "0.00";
+  while (balance > 0) {
+    if (count === 3) {
+      parsed = "," + parsed;
+      count = 0;
+    }
+    mod = balance % 10;
+    parsed = mod + parsed;
+    balance = Math.floor(balance / 10);
+    count++;
+  }
+  return parsed;
+};
 
 function Dashboard() {
-  return (
-    <div className="bg-black">Hello</div>
-  )
+  return <div className="bg-black">hello</div>
 };
+
 export default Dashboard;
