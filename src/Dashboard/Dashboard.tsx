@@ -276,7 +276,7 @@ export function parseBalance(balance: number) {
 
 function Dashboard({userData} : {userData : any}) {
 return (
-  <div>{JSON.stringify(userData)}</div>
+  <div className="w-100">{JSON.stringify(userData)}</div>
 )
 };
 
