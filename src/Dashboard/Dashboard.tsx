@@ -108,7 +108,7 @@ function Dashboard({
 
   return (
 
-    <div className="grid box-border w-full grid-cols-1 bg-slate-100 sm:flex sm:flex-row-reverse">
+    <div className="bg-black">
       {isPending ? (
         <Loader
           parentClass=""
@@ -142,7 +142,71 @@ function Dashboard({
                 />
               </div>
             </div>
-            
+            {data && data.status === 200 && (
+              <>
+              <div className="hidden md:block relative">
+              <div ref={leftArrowRef} className="sm:absolute hidden h-10 bg-white rounded-4xl top-10.5 cursor-pointer" onClick={scrollLeft}>
+                <img src="/left-arrow.png" alt="left-arrow" />
+              </div>
+              <div ref={rightArrowRef} className="sm:absolute h-10 bg-white rounded-4xl top-10.5 right-0 cursor-pointer" onClick={scrollRight}>
+                <img src="/right-arrow.png" alt="right-arrow" />
+              </div>
+              </div>
+
+              <div
+              ref={scrollDivRef}
+                className="overflow-x-auto scrollbar-hide w-21.6 min-[600px]:w-[480px] md:w-[600px] lg:w-[750px] flex flex-nowrap max-[360px]:pb-16"
+                onScroll={handleScroll}
+              >
+                {data.message.length > 0 ? (
+                  data.message.map((item: any) => {
+                    const progress = Math.floor(
+                      (item.startAmount / item.target) * 100
+                    );
+                    const col = colorChange(progress);
+                    return (
+                      <div
+                        key={item.reference}
+                        className="bg-white px-3 pt-9 pb-4 rounded-2xl w-60"
+                      >
+                        <Link to={`/trans/details/${item.reference}`} state={item}>
+                        <div className="font-bold text-lg">{item.goal}</div>
+                        <div className="pb-4.5 text-slate-500 pt-0.4">
+                          {calculateTimeLeft(parseInt(item.duration))}
+                        </div>
+                        <div className="grid grid-cols-1 place-content-between">
+                          <div className="font-semibold">
+                            <img className="inline w-2.6 pb-1" src="/naira-1.png" alt="amount-img" />
+                            {parseBalance(item.startAmount)}
+                          </div>
+                          <div className="text-slate-500 font-semibold">
+                          <img className="inline w-2.6 pb-1 opacity-50" src="/naira-1.png" alt="target-img" />
+                            {parseBalance(item.target)}
+                          </div>
+                          <div className="col-span-2 relative pt-3 text-slate-500">
+                            <div className="absolute right-0 bottom-2">
+                              {progress}% saved
+                            </div>
+                            <div className=" border bg-slate-100 rounded-xl h-0.4 mt-3">
+                              <div
+                                className={`h-0.4 ${col} rounded-xl`}
+                                style={{ width: `${progress}%` }}
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                        </Link>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className="text-slate-500 ml-10 mt-10">
+                    Your savings will appear here.
+                  </div>
+                )}
+              </div>
+              </>
+            )}
           </div>
         </div>
         <DashboardNavbar />
