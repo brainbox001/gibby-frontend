@@ -108,7 +108,7 @@ function Dashboard({
 
   return (
 
-    <div className="grid w-full grid-cols-1 bg-slate-100 sm:flex sm:flex-row-reverse">
+    <div className="grid box-border w-full grid-cols-1 bg-slate-100 sm:flex sm:flex-row-reverse">
       {isPending ? (
         <Loader
           parentClass=""
