@@ -172,7 +172,7 @@ function Dashboard({
                         <Link to={`/trans/details/${item.reference}`} state={item}>
                         <div className="font-bold text-lg">{item.goal}</div>
                         <div className="pb-4.5 text-slate-500 pt-0.4">
-                          {calculateTimeLeft(item.duration)}
+                          {calculateTimeLeft(parseInt(item.duration))}
                         </div>
                         <div className="grid grid-cols-1 place-content-between">
                           <div className="font-semibold">
