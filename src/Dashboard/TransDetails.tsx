@@ -143,7 +143,7 @@ function TransDetails() {
                         <div className="text-xl font-bold">
                             {state.goal}
                         </div>
-                        <div className="pt-0.5 text-slate-400">{calculateTimeLeft(state.duration)}</div>
+                        <div className="pt-0.5 text-slate-400">{calculateTimeLeft(parseInt(state.duration))}</div>
                     </div>
                     <div className="my-4 mx-3 font-bold">Active Savings</div>
                     <div className="mx-4 bg-white px-3 py-4 rounded-2xl relative">
