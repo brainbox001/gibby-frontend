@@ -274,9 +274,9 @@
 //   return parsed;
 // }
 
-// export default Dashboard;
 function Dashboard() {
   return (
     <div className="bg-black">Hello</div>
   )
 };
+export default Dashboard;
