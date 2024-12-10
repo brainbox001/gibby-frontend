@@ -108,7 +108,7 @@ function Dashboard({
 
   return (
 
-    <div className="bg-black">
+    <div className="grid grid-cols-1 box-border bg-slate-100 sm:flex sm:flex-row-reverse" style={{width : '100%'}}>
       {isPending ? (
         <Loader
           parentClass=""
