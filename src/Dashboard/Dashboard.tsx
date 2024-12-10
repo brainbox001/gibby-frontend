@@ -108,7 +108,7 @@ function Dashboard({
 
   return (
 
-    <div className="">
+    <div className="grid box-border bg-slate-100 sm:flex sm:flex-row-reverse">
       {isPending ? (
         <Loader
           parentClass=""
@@ -116,7 +116,7 @@ function Dashboard({
           animateClass="add"
         />
       ) : (
-        <div className="w-21.6 box-border grid bg-slate-100 sm:flex sm:flex-row-reverse">
+        <>
         <div className="bg-slate-100 flex flex-col sm:basis-4/5">
           <div className="flex flex-col place-items-center bg-white pt-9 pb-4 sm:m-9 md:mx-10.5 rounded-xl relative">
             <div className="pb-3">
@@ -210,7 +210,7 @@ function Dashboard({
           </div>
         </div>
         <DashboardNavbar />
-        </div>
+        </>
       )}
     </div>
     
