@@ -231,19 +231,15 @@ export function calculateTimeLeft(date: number) {
   let minutesLeft = Math.floor((date - currentDate) / (1000 * 60));
 
   if (yearsLeft > 0) {
-    console.log('years -', yearsLeft === 1);
     return yearsLeft === 1 ? "A Year left" : `${yearsLeft} Years left`;
   }
   if (monthsLeft > 0) {
-    console.log('months -', monthsLeft === 1);
-    return yearsLeft === 1 ? "A Month left" : `${monthsLeft} Months left`;
+    return monthsLeft === 1 ? "A Month left" : `${monthsLeft} Months left`;
   }
   if (daysLeft > 0) {
-    console.log('days -', daysLeft === 1);
     return daysLeft === 1 ? "A Day left" : `${daysLeft} Days left`;
   }
   if (hoursLeft > 0) {
-    console.log('hours -', hoursLeft === 1);
     return hoursLeft === 1 ? "An Hour left" : `${hoursLeft} Hours left`;
   }
 
