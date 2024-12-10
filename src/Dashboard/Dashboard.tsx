@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../Loader";
-import DashboardNavbar from "./DashboardNav";
+// import DashboardNavbar from "./DashboardNav";
 import Deposit from "./Deposit";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -209,7 +209,7 @@ function Dashboard({
             )}
           </div>
         </div>
-        <DashboardNavbar />
+        
         </>
       )}
     </div>
