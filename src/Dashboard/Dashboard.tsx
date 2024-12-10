@@ -274,8 +274,8 @@ export function parseBalance(balance: number) {
   return parsed;
 };
 
-function Dashboard() {
-  return <div className="bg-black">hello</div>
+function Dashboard({userData} : {userData : any}) {
+  return <div className="bg-black">{JSON.stringify(userData)}</div>
 };
 
 export default Dashboard;
