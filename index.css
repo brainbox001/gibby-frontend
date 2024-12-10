@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-#id {
-  @apply box-border bg-black
+.source-root {
+  @apply box-border max-w-screen
 }
 
 .custom-home > div {
