@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+#id {
+  @apply box-border bg-black
+}
+
 .custom-home > div {
   @apply ml-3 mr-3 lg:mt-10 sm:ml-9 sm:mr-9;
 }
