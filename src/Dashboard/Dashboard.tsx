@@ -108,7 +108,7 @@ function Dashboard({
 
   return (
     <div className="box-border w-screen">
-    <div className="">
+    <div className="grid w-full grid-cols-1 bg-slate-100 sm:flex sm:flex-row-reverse">
       {isPending ? (
         <Loader
           parentClass=""
@@ -155,7 +155,7 @@ function Dashboard({
 
               <div
               ref={scrollDivRef}
-                className="overflow-x-auto scrollbar-hide w-21.6 min-[600px]:w-[480px] md:w-[600px] lg:w-[750px] flex flex-nowrap max-[360px]:pb-16"
+                className="overflo w-21.6 min-[600px]:w-[480px] md:w-[600px] lg:w-[750px] flex flex-nowrap max-[360px]:pb-16"
                 onScroll={handleScroll}
               >
                 {data.message.length > 0 ? (
