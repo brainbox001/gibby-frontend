@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../Loader";
-// import DashboardNavbar from "./DashboardNav";
+import DashboardNavbar from "./DashboardNav";
 import Deposit from "./Deposit";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -108,7 +108,7 @@ function Dashboard({
 
   return (
 
-    <div className="grid max-w-screen grid-cols-1 bg-slate-100 sm:flex sm:flex-row-reverse">
+    <div className="grid w-full grid-cols-1 bg-slate-100 sm:flex sm:flex-row-reverse">
       {isPending ? (
         <Loader
           parentClass=""
@@ -209,7 +209,7 @@ function Dashboard({
             )}
           </div>
         </div>
-        
+        <DashboardNavbar />
         </>
       )}
     </div>
