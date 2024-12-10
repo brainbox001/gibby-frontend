@@ -155,7 +155,7 @@ function Dashboard({
 
               <div
               ref={scrollDivRef}
-                className="overflo w-21.6 min-[600px]:w-[480px] md:w-[600px] lg:w-[750px] flex flex-nowrap max-[360px]:pb-16"
+                
                 onScroll={handleScroll}
               >
                 {data.message.length > 0 ? (
