@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 .source-root {
-  @apply box-border w-screen
+  max-width :100%;
+  box-sizing: border-box;
 }
 
 .custom-home > div {
