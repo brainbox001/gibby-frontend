@@ -234,7 +234,7 @@ export function calculateTimeLeft(date: number) {
     return yearsLeft === 1 ? "A Year left" : `${yearsLeft} Years left`;
   }
   if (monthsLeft > 0) {
-    return yearsLeft === 1 ? "A Month left" : `${monthsLeft} Months left`;
+    return monthsLeft === 1 ? "A Month left" : `${monthsLeft} Months left`;
   }
   if (daysLeft > 0) {
     return daysLeft === 1 ? "A Day left" : `${daysLeft} Days left`;
