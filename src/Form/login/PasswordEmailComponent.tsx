@@ -1,6 +1,7 @@
 import { useEffect, useRef} from "react";
 import { useLocation } from "react-router-dom";
 import Loader from "../../Loader";
+import API_URL from "../../../config/api_url";
 
 function PassWordEmailComponent({
   processes,
@@ -40,7 +41,7 @@ function PassWordEmailComponent({
         })
       try {
         const response = await fetch(
-          "https://gibby-app.onrender.com/user/user-password-reset",
+          `${API_URL}/user/user-password-reset`,
           {
             method: "POST",
             credentials: "include",

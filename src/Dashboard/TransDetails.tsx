@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { calculateTimeLeft, colorChange, parseBalance } from "./Dashboard";
 import Loader from "../Loader";
+import API_URL from "../../config/api_url";
+import { RiArrowLeftLine } from "react-icons/ri";
 
 function TransDetails() {
     let location = useLocation();
@@ -65,7 +67,7 @@ function TransDetails() {
     };
 
     function handleNav() {
-        navigate('/');
+        navigate('/dashboard');
     };
 
     function handleClick() {
@@ -92,17 +94,26 @@ function TransDetails() {
             });
 
             try {
-                const response = await fetch('https://gibby-app.onrender.com/transaction/pay', {
+                const response = await fetch(`${API_URL}/transaction/pay`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json', 'personal': 'gibby-frontend' },
                     body: JSON.stringify({ add: true, startAmount: input.value, _transRef: state.reference }),
                 });
+                console.log(response);
                 const data = await response.json();
 
                 if (response.status === 200) {
                     window.open(data.authorization_url);
-                    navigate(0);
+                    // navigate(0);
+                    setInput({
+                        isOpen: false,
+                        value: ''
+                    });
+                    setStatus({
+                        ...status,
+                        state: 'not loading'
+                    });
                 } else {
                     setStatus({
                         state: 'error',
@@ -135,8 +146,8 @@ function TransDetails() {
             <div>
                 <div className="bg-slate-100 h-screen sm:px-4">
                     <div className="absolute py-3">
-                        <button onClick={handleNav}>
-                            <img className="w-4" src="/prev-arrow.png" alt="left-arrow" />
+                        <button onClick={handleNav} className="ml-2">
+                            <RiArrowLeftLine size={25} />
                         </button>
                     </div>
                     <div className="px-4 py-10.5 bg-white rounded-2xl">

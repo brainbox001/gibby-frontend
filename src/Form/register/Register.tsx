@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import VerifyEmail from "../verify-email/VerifyEmail";
 import RegisterInput from "./RegisterInput";
-
+import API_URL from "../../../config/api_url";
 
 function Register() {
     useEffect(() => {
@@ -141,14 +141,14 @@ function Register() {
             });
 
             try {
-                const response = await fetch('https://gibby-app.onrender.com/user/register', {
+                const response = await fetch(`${API_URL}/user/register`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json', 'personal' : 'gibby-frontend' },
                     body: JSON.stringify(body),
                   });
                   const data = await response.json();
-                    console.log(data)
+                    console.log(response)
                   if (response.status === 201) setStatus({state : 'not loading', status: 201, data: data.email});
                   else setStatus({state : 'error', status:response.status, data: data.error});
 

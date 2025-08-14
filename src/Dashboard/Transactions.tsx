@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../Loader";
 import { useNavigate } from "react-router-dom";
-import DashboardNavbar from "./DashboardNav";
 import { parseBalance } from "./Dashboard";
+import API_URL from "../../config/api_url";
 
 function Transaction() {
     let navigate = useNavigate();
     const getTransaction = async () => {
         try {
             const response = await fetch(
-                "https://gibby-app.onrender.com/transaction/",
+                `${API_URL}/transaction/`,
                 {
                     method: "GET",
                     credentials: "include",
@@ -77,7 +77,6 @@ function Transaction() {
                 </div></div>
             }
         </div>
-        <DashboardNavbar height="sm:h-3/5" />
         </div>
     )
 

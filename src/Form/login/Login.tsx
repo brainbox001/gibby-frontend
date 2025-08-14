@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Loader from "../../Loader";
 import VerifyEmail from "../verify-email/VerifyEmail";
+import API_URL from "../../../config/api_url";
 
 function Login () {
     useEffect(() => {  
@@ -46,14 +47,14 @@ function Login () {
                 state : 'loading'
             });
             try {
-                const response = await fetch('https://gibby-app.onrender.com/user/login', {
+                const response = await fetch(`${API_URL}/user/login`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json', 'personal' : 'gibby-frontend' },
                     body: JSON.stringify(form),
                   });
                 const data = await response.json();
-    
+                  console.log(response)
                 if (response.status === 215) {
                     setStatus({
                         ...status,
@@ -63,7 +64,7 @@ function Login () {
                     });
                 }
                 else if (response.status === 200) {
-                    window.location.href = '/';
+                    window.location.href = '/dashboard';
                 }
                 else {
                     setStatus({

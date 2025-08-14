@@ -1,47 +1,53 @@
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../Loader";
-import DashboardNavbar from "./DashboardNav";
 import Deposit from "./Deposit";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { RiArrowRightLine } from "react-icons/ri";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import API_URL from "../../config/api_url";
+import { GeneralContext } from "../GeneralContext";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/grid";
+import "swiper/css/pagination";
+import "../../index.css";
+import * as Dialog from "@radix-ui/react-dialog";
 
-function Dashboard({
-  userData,
-}: {
-  userData: { message: any; status: number };
-}) {
-  let rightArrowRef = useRef<any>(null);
-  let leftArrowRef = useRef<any>(null);
-  let scrollDivRef = useRef<any>(null);
+function Dashboard({}) {
 
-  let location = useLocation();
-    const navigate = useNavigate();
+  // let location = useLocation();
+  // const navigate = useNavigate();
 
-    const state = location.state;
+  // const state = location.state;
 
-    useEffect(() => {
-      document.title = 'User Dashboard';
-        if (!state || !state.goal) {
-            navigate('/');
-        };
+  const context = useContext(GeneralContext);
+  if (!context) throw new Error("Footer must be used within a ContextProvider");
 
-    }, []);
+  const { datas } = context;
+  const userData = datas.data;
+
+  // console.log("reached here");
+
+  useEffect(() => {
+    document.title = "User Dashboard";
+    // if (!state || !state.goal) {
+    //   navigate("/");
+    // }
+  }, []);
 
   const [deposit, setDeposit] = useState(false);
 
   const getSavings = async () => {
     try {
-      const response = await fetch(
-        "https://gibby-app.onrender.com/transaction/savings",
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            personal: "gibby-frontend",
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/transaction/savings`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          personal: "gibby-frontend",
+        },
+      });
       const message = await response.json();
       const status = response.status;
 
@@ -58,38 +64,6 @@ function Dashboard({
     staleTime: 1000 * 60 * 5,
   });
 
-  function scrollLeft(){
-    let width = 0 - scrollDivRef.current.clientWidth;
-    scrollDivRef.current.scrollBy({ left: width, behavior: 'smooth' });
-  };
-
-  function scrollRight(){
-    let width = scrollDivRef.current.clientWidth;
-    scrollDivRef.current.scrollBy({ left: width, behavior: 'smooth' });
-  };
-
-  function handleScroll(e: any) {
-    const total = e.target.scrollLeft + e.target.clientWidth;
-    if (e.target.scrollLeft > 0) {
-      leftArrowRef.current.classList.remove('hidden');
-      leftArrowRef.current.classList.add('inline');
-    }
-    else {
-      leftArrowRef.current.classList.remove('inline');
-      leftArrowRef.current.classList.add('hidden');
-    };
-
-    if (total >= e.target.scrollWidth) {
-      rightArrowRef.current.classList.remove('inline');
-      rightArrowRef.current.classList.add('hidden');
-      
-    }
-    else {
-      rightArrowRef.current.classList.remove('hidden');
-      rightArrowRef.current.classList.add('inline');
-    };
-  };
-
   if (error) {
     return (
       <div className="grid grid-cols-1 place-items-center mt-10 text-white text-rose-600 z-10">
@@ -100,15 +74,10 @@ function Dashboard({
         </div>
       </div>
     );
-  };
-
-  if (deposit) {
-    return <Deposit />
-  };
+  }
 
   return (
-
-    <div className="grid w-full grid-cols-1 bg-slate-100 sm:flex sm:flex-row-reverse">
+    <div className="mr-4 mt-4">
       {isPending ? (
         <Loader
           parentClass=""
@@ -116,104 +85,123 @@ function Dashboard({
           animateClass="add"
         />
       ) : (
-        <>
-        <div className="bg-slate-100 flex flex-col sm:basis-4/5">
-          <div className="flex flex-col place-items-center bg-white pt-9 pb-4 sm:m-9 md:mx-10.5 rounded-xl relative">
-            <div className="pb-3">
-              <img src="/naira.png" alt="naira-sign" />
-            </div>
-            <div className="pb-3 text-3xl font-bold">
-              {parseBalance(userData.message.balance)}
-            </div>
-            <div>
-              <button className="bg-blue-600 p-0.5 rounded text-white" onClick={() => setDeposit(true)}>
-                Deposit
-              </button>
-            </div>
-          </div>
-          <div className="px-3 py-9">
-            <div className="flex justify-between pb-4">
-              <div className="font-bold">My Savings</div>
-              <div>
-                <img
-                  className="w-3.5 inline"
-                  src="/free_icon_1.svg"
-                  alt="slide-arrow"
-                />
-              </div>
-            </div>
-            {data && data.status === 200 && (
-              <>
-              <div className="hidden md:block relative">
-              <div ref={leftArrowRef} className="sm:absolute hidden h-10 bg-white rounded-4xl top-10.5 cursor-pointer" onClick={scrollLeft}>
-                <img src="/left-arrow.png" alt="left-arrow" />
-              </div>
-              <div ref={rightArrowRef} className="sm:absolute h-10 bg-white rounded-4xl top-10.5 right-0 cursor-pointer" onClick={scrollRight}>
-                <img src="/right-arrow.png" alt="right-arrow" />
-              </div>
+        userData &&
+        userData.message && (
+          <>
+            <div className="flex flex-col justify-between items-center mb-4">
+              <Dialog.Root open={deposit} onOpenChange={setDeposit}>
+              <div className="flex flex-col justify-between items-center bg-white shadow-lg rounded-lg p-4 sm:p-6 w-full">
+                <div className="my-2">
+                  <img src="/naira.png" alt="naira-sign" />
+                </div>
+                <div className="text-3xl my-2 font-bold">
+                  {parseBalance(userData.message.balance)}
+                </div>
+                <Dialog.Trigger asChild>
+                <div>
+                  <button
+                    className="bg-blue-600 my-2 rounded-lg py-2 px-3 text-white font-semibold"
+                    onClick={() => setDeposit(true)}
+                  >
+                    Deposit
+                  </button>
+                </div>
+                </Dialog.Trigger>
               </div>
 
-              <div
-              ref={scrollDivRef}
-                className="overflow-x-auto scrollbar-hide w-21.6 min-[600px]:w-[480px] md:w-[600px] lg:w-[750px] flex flex-nowrap max-[360px]:pb-16"
-                onScroll={handleScroll}
-              >
-                {data.message.length > 0 ? (
-                  data.message.map((item: any) => {
-                    const progress = Math.floor(
-                      (item.startAmount / item.target) * 100
-                    );
-                    const col = colorChange(progress);
-                    return (
-                      <div
-                        key={item.reference}
-                        className="bg-white px-3 pt-9 pb-4 rounded-2xl w-60"
-                      >
-                        <Link to={`/trans/details/${item.reference}`} state={item}>
-                        <div className="font-bold text-lg">{item.goal}</div>
-                        <div className="pb-4.5 text-slate-500 pt-0.4">
-                          {calculateTimeLeft(parseInt(item.duration))}
-                        </div>
-                        <div className="grid grid-cols-1 place-content-between">
-                          <div className="font-semibold">
-                            <img className="inline w-2.6 pb-1" src="/naira-1.png" alt="amount-img" />
-                            {parseBalance(item.startAmount)}
-                          </div>
-                          <div className="text-slate-500 font-semibold">
-                          <img className="inline w-2.6 pb-1 opacity-50" src="/naira-1.png" alt="target-img" />
-                            {parseBalance(item.target)}
-                          </div>
-                          <div className="col-span-2 relative pt-3 text-slate-500">
-                            <div className="absolute right-0 bottom-2">
-                              {progress}% saved
-                            </div>
-                            <div className=" border bg-slate-100 rounded-xl h-0.4 mt-3">
-                              <div
-                                className={`h-0.4 ${col} rounded-xl`}
-                                style={{ width: `${progress}%` }}
-                              ></div>
-                            </div>
-                          </div>
-                        </div>
-                        </Link>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <div className="text-slate-500 ml-10 mt-10">
-                    Your savings will appear here.
+              <Deposit setDeposit={setDeposit} />
+
+              <div className="w-full my-8">
+                <div className="flex justify-between items-center">
+                  <div className="font-semibold">My Savings</div>
+                  <div>
+                    <RiArrowRightLine size={20} className="text-blue-600" />
                   </div>
+                </div>
+
+                {data && data.status === 200 && (
+                  <>
+                    <div className="mt-3">
+                      <Swiper
+                        slidesPerView={2}
+                        spaceBetween={20}
+                        pagination={{ clickable: true }}
+                        modules={[Pagination]}
+                        className="mySwiper"
+                      >
+                        {data.message.length > 0 ? (
+                          data.message.map((item: any) => {
+                            const progress = Math.floor(
+                              (item.startAmount / item.target) * 100
+                            );
+                            const col = colorChange(progress);
+                            return (
+                              <SwiperSlide key={item.reference}>
+                                <div className="bg-white px-3 pt-9 pb-4 rounded-2xl shadow w-56">
+                                  <Link
+                                    to={`/dashboard/trans/details/${item.reference}`}
+                                    state={item}
+                                  >
+                                    <div className="font-bold text-lg">
+                                      {item.goal}
+                                    </div>
+                                    <div className="pb-4 text-slate-500">
+                                      {calculateTimeLeft(
+                                        parseInt(item.duration)
+                                      )}
+                                    </div>
+
+                                    <div className="grid gap-2">
+                                      <div className="font-semibold">
+                                        <img
+                                          className="inline w-3 pb-1"
+                                          src="/naira-1.png"
+                                          alt="amount-img"
+                                        />
+                                        {parseBalance(item.startAmount)}
+                                      </div>
+                                      <div className="text-slate-500 font-semibold">
+                                        <img
+                                          className="inline w-3 pb-1 opacity-50"
+                                          src="/naira-1.png"
+                                          alt="target-img"
+                                        />
+                                        {parseBalance(item.target)}
+                                      </div>
+
+                                      <div className="relative pt-3 text-slate-500">
+                                        <div className="absolute right-0 bottom-2">
+                                          {progress}% saved
+                                        </div>
+                                        <div className="border bg-slate-100 rounded-xl h-1 mt-3">
+                                          <div
+                                            className={`h-1 ${col} rounded-xl`}
+                                            style={{ width: `${progress}%` }}
+                                          ></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </Link>
+                                </div>
+                              </SwiperSlide>
+                            );
+                          })
+                        ) : (
+                          <div className="text-slate-500 ml-10 mt-10">
+                            Your savings will appear here.
+                          </div>
+                        )}
+                      </Swiper>
+                    </div>
+                  </>
                 )}
               </div>
-              </>
-            )}
-          </div>
-        </div>
-        <DashboardNavbar />
-        </>
+              </Dialog.Root>
+            </div>
+          </>
+        )
       )}
     </div>
-    
   );
 }
 

@@ -1,30 +1,37 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import { RiHome2Line, RiFileLine, RiUserLine } from "react-icons/ri";
 
-function DashboardNavbar({height, col} : {height? : string; col? : string}) {
+function DashboardNavbar() {
   return (
-    <div className="relative sm:basis-1/4 sm:h-screen">
-      <div className={`fixed max-[639px]:bg-white ${col || 'bg-slate-100'} sm:sticky sm:top-0 bottom-0 w-full py-3 ${height || 'sm:h-4/5'}`}>
-        <div className="flex justify-around sm:flex-col sm:items-center sm:h-full">
+    <div className="flex flex-col sm:flex-row h-screen bg-gray-200 relative">
+      {/* Navbar */}
+      <div className="flex flex-row sm:flex-col sm:left-0 items-center justify-around fixed bottom-0 shadow-lg  w-full sm:sticky py-2 sm:w-[8%] sm:h-screen bg-gray-50 z-10">  
           <div>
-            <NavLink to="/">
-            <img  src="/home.png" alt="home-img" />
-            </NavLink>
-            
-          </div>
-          <div>
-            <NavLink to="/trans">
-            <img src="/arrow.png" alt="trans-img" />
-            </NavLink>
-            
-          </div>
-          <div>
-            <NavLink to="/user">
-            <img src="/person.png" alt="person-img" />
+            <NavLink to="/dashboard">
+              <RiHome2Line size={25} />
             </NavLink>
           </div>
-        </div>
+
+          <div>
+            <NavLink to="/dashboard/trans">
+              <RiFileLine size={25} />
+            </NavLink>
+          </div>
+
+          <div>
+            <NavLink to="/dashboard/user">
+              <RiUserLine size={25} />
+            </NavLink>
+          </div>
+      </div>
+
+      {/* Page Content */}
+      <div className="sm:w-[90%] ml-4">
+        {/* Hello world */}
+        <Outlet />
       </div>
     </div>
   );
 }
+
 export default DashboardNavbar;

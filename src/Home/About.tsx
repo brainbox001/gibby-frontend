@@ -8,7 +8,6 @@ function About() {
     }, []);
     return (
         <>
-        <p>{process.env.VITE_BACKEND_URL}</p>
         <div className="mt-16 mx-10">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>

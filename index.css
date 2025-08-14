@@ -54,3 +54,14 @@
 .nav-custom-2 > .register {
   @apply bg-blue-600 text-white rounded-md;
 }
+
+/* swiper.css */
+.mySwiper {
+  padding: 10px 0; /* space above and below */
+}
+
+.mySwiper .swiper-slide {
+  display: flex;
+  justify-content: center; /* center your cards */
+}
+

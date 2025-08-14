@@ -1,6 +1,7 @@
 import { useState, useRef} from "react";
 import VerifyFormInput from "./VerifyFormInput";
 import Loader from "../../Loader";
+import API_URL from "../../../config/api_url";
 
 function VerifyEmail({email, forPasswordChange, processes, setProcesses} :{email : string, forPasswordChange? : boolean, processes? : any, setProcesses? : any}){
 
@@ -57,7 +58,7 @@ function VerifyEmail({email, forPasswordChange, processes, setProcesses} :{email
                 const requestBody : any = {code, email};
                 if(forPasswordChange) requestBody['forPasswordChange'] = true
         
-                const response = await fetch('https://gibby-app.onrender.com/user/verify-user', {
+                const response = await fetch(`${API_URL}/user/verify-user`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json', 'personal' : 'gibby-frontend' },
@@ -75,7 +76,7 @@ function VerifyEmail({email, forPasswordChange, processes, setProcesses} :{email
                 };
 
                 if (response.status === 200) {
-                    window.location.href = '/';
+                    window.location.href = '/dashboard';
                 }
                 else {
                     setStatus({

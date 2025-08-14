@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Loader from "../Loader";
+import API_URL from "../../config/api_url";
 
 function VerifyPayment() {
   const [searchParams] = useSearchParams();
@@ -10,7 +11,9 @@ function VerifyPayment() {
     data : ""
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  // console.log("Reached verify payment");
 
   const target = searchParams.get("target");
   const startAmount = searchParams.get("startAmount");
@@ -22,14 +25,23 @@ function VerifyPayment() {
   let add : string | boolean | null = searchParams.get("add");
   add = add === 'true';
 
+  // console.log("target", target);
+  // console.log("startAmount", startAmount);
+  // console.log("duration", duration);
+  // console.log("goal", goal);
+  // console.log("reference", reference);
+  // console.log("email", email);
+  // console.log("transRef", _transRef);
+  // console.log("add", add);
+
   const hasExecuted = useRef(false);
 
   async function handleVerification() {
-  
+    // console.log("has executed was called");
     if (hasExecuted.current) return;
     hasExecuted.current = true;
     try {
-      const response = await fetch("https://gibby-app.onrender.com/transaction/verify", {
+      const response = await fetch(`${API_URL}/transaction/verify`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -49,11 +61,13 @@ function VerifyPayment() {
       });
       const data = await response.json();
       if (response.status === 200) {
+        // console.log(data);
         setStatus({
           data : data.message,
           state: "not loading",
           status : 200
         });
+        window.location.href = "/dashboard";
       } else {
         setStatus({
           data : data.error,
@@ -77,9 +91,9 @@ function VerifyPayment() {
     <Loader parentClass="" childClasses="h-0.5 w-0.5 bg-blue-600" animateClass="add" />
     </div>
 
-  if (status.status === 200) {
-    navigate('/');
-  }
+  // if (status.status === 200) {
+  //   navigate('/dashboard');
+  // }
   if(status.status === 319) return (
     <div className="text-rose-600 grid grid-cols-1 place-items-center mt-14">
       <div>

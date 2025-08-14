@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import Loader from "../../Loader";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../../../config/api_url";
 
 function NewPasswordComponent({processes, setProcesses} : {processes : any, setProcesses : any}) {
   const [passwords, setPasswords] = useState({
@@ -64,7 +65,7 @@ function NewPasswordComponent({processes, setProcesses} : {processes : any, setP
 
       try {
         const response = await fetch(
-          "https://gibby-app.onrender.com/user/user-password-reset",
+          `${API_URL}/user/user-password-reset`,
           {
             method: "POST",
             credentials: "include",
