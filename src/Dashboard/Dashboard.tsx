@@ -3,7 +3,7 @@ import Loader from "../Loader";
 import Deposit from "./Deposit";
 import { useEffect, useState, useContext } from "react";
 import { RiArrowRightLine } from "react-icons/ri";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import API_URL from "../../config/api_url";
 import { GeneralContext } from "../GeneralContext";
 import { Swiper, SwiperSlide } from "swiper/react";
